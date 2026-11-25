@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Token Radar — pre-token protocols ranked by implied value</title>
+<link rel="stylesheet" href="app.css">
+</head>
+<body>
+<header class="top">
+  <div class="brand"><span class="pulse" aria-hidden="true"></span><h1>TOKEN RADAR</h1><span class="tag">radar-2</span></div>
+  <p class="sub">Pre-token protocols, ranked by implied value — which launch is worth farming next, and what to do about it.</p>
+  <p class="meta" id="meta">Loading the sealed snapshot…</p>
+</header>
+<section class="stats" id="stats" aria-label="Board statistics"></section>
+<nav class="tabs" aria-label="Views">
+  <button id="tab-board" class="tab on" type="button">Pre-token board</button>
+  <button id="tab-live" class="tab" type="button">Live tokens</button>
+  <button id="tab-model" class="tab" type="button">Model sandbox</button>
+</nav>
+<section class="controls" id="controls">
+  <label>Search <input id="q" type="search" placeholder="name or slug…" autocomplete="off"></label>
+  <label>Category <select id="cat"><option value="all">All categories</option></select></label>
+  <label>Chain <select id="chain"><option value="all">All chains</option></select></label>
+  <label>Signal <select id="sig">
+    <option value="all">Any signal</option><option>Surging</option><option>Growing</option>
+    <option>Steady</option><option>Cooling</option><option>Unknown</option>
+  </select></label>
+  <label class="check"><input id="watch" type="checkbox"> Watchlist only</label>
+  <span class="count" id="count"></span>
+</section>
+<main id="board" tabindex="-1" aria-busy="true"></main>
+<aside id="detail" class="detail" hidden aria-label="Protocol detail"></aside>
+<section class="method" id="method">
+  <h2>How the radar scores</h2>
+  <p><strong>Implied value</strong> = TVL × 0.25 × growth × maturity × breadth. Growth is the 7-day TVL change clamped to −60…+120% at half weight; maturity rises with how long the protocol has run with no token (0.60 → 1.00 over 3 years, 365 days when its start date is unknown); breadth is 1 + 0.05 × ln(chains). The same function scores every row — no name is ever special-cased. Change the constants in the Model sandbox and the board re-ranks live.</p>
+  <p><strong>What counts as pre-token:</strong> the protocol's record carries no token (no market cap, no CoinGecko id, no symbol) <em>and</em> it is not a wrapped, staked or bridged product of a token that already trades — the watchlist's own exclusion rule, applied to the whole board. That is why WBTC, Binance staked ETH and USDT0 never appear here: their tokens already trade, so they are not launches to farm. “Records no token” is not proof a protocol has none, only what its record says.</p>
+  <p><strong>Read the board:</strong> rank 1 is the most valuable launch on the model. Every row carries a six-step farm plan with what it costs and how long it takes, derived from the protocol's category, chains, TVL and age. The Live tokens tab shows protocols whose token already trades at the market's own value, kept apart from the ranked board. Implied value is this entry's own claim, never a promise a token launches or what it will be worth.</p>
+</section>
+<footer class="foot">Data: DefiLlama snapshot, 14 November 2026 · Built for make.fun's “Build the best token launch radar” · Static page, no network</footer>
+<script src="../data.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
